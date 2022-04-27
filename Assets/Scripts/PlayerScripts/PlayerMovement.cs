@@ -46,10 +46,24 @@ public class PlayerMovement : MonoBehaviour
     }
     void Sprint()
     {
-        _moveSpeed = Input.GetKey(KeyCode.LeftShift) ? _sprintSpeed : _normalSpeed;
+        if (!_isCrouching && Input.GetKey(KeyCode.LeftShift))
+            _moveSpeed = _sprintSpeed;
+        else
+            _moveSpeed = _normalSpeed;
     }
     void Crouch()
     {
-        _moveSpeed = Input.GetKey(KeyCode.C) ? _crouchSpeed : _normalSpeed;
+        if (Input.GetKey(KeyCode.C))
+        {
+            look_root.localPosition = new Vector3(0, _crouchHeight);
+            _moveSpeed = _crouchSpeed;
+            _isCrouching = true;
+        }
+        if (Input.GetKeyUp(KeyCode.C))     
+        {
+            look_root.localPosition = new Vector3(0, _standHeight);
+            _moveSpeed = _normalSpeed;
+            _isCrouching = false;
+        }
     }
 }
