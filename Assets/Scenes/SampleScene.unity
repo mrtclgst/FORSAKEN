@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -228,6 +228,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Ground
       objectReference: {fileID: 0}
+    - target: {fileID: 1632899111499720, guid: 1aa7bf25b446c4baa8e0af352f470d1b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4307160131325616, guid: 1aa7bf25b446c4baa8e0af352f470d1b, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -274,6 +278,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1aa7bf25b446c4baa8e0af352f470d1b, type: 3}
+--- !u!4 &1975759510 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1121071375339509765, guid: 94c353d6919700942a748f83b2dee3ce, type: 3}
+  m_PrefabInstance: {fileID: 1121071375307490670}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1121071375307490670
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -281,6 +290,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2041723973, guid: 94c353d6919700942a748f83b2dee3ce, type: 3}
+      propertyPath: rollSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1121071374255460662, guid: 94c353d6919700942a748f83b2dee3ce, type: 3}
       propertyPath: m_Name
       value: Player
@@ -328,6 +341,18 @@ PrefabInstance:
     - target: {fileID: 1121071374255460663, guid: 94c353d6919700942a748f83b2dee3ce, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2223497693947912255, guid: 94c353d6919700942a748f83b2dee3ce, type: 3}
+      propertyPath: look_root
+      value: 
+      objectReference: {fileID: 1975759510}
+    - target: {fileID: 2223497693947912255, guid: 94c353d6919700942a748f83b2dee3ce, type: 3}
+      propertyPath: _moveSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2223497693947912255, guid: 94c353d6919700942a748f83b2dee3ce, type: 3}
+      propertyPath: _sprintSpeed
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94c353d6919700942a748f83b2dee3ce, type: 3}

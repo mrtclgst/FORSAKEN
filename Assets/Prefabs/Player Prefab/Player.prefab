@@ -313,7 +313,7 @@ MonoBehaviour:
   lookRoot: {fileID: 1121071375339509765}
   invert: 0
   canUnlock: 1
-  sensivity: 5
+  sensivity: 1
   smoothWeight: 0.4
   rollAngle: 0
   rollSpeed: 3

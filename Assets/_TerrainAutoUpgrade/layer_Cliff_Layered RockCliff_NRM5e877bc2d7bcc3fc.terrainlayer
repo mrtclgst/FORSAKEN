@@ -7,8 +7,8 @@ TerrainLayer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: layer_Cliff_Layered RockCliff_NRM5e877bc2d7bcc3fc
-  m_DiffuseTexture: {fileID: 2800000, guid: e13ad7a9d4dc84697aaa540e7548d65b, type: 3}
-  m_NormalMapTexture: {fileID: 2800000, guid: 16a5103cddc299c498d745210ee874e9, type: 3}
+  m_DiffuseTexture: {fileID: 2800000, guid: 4750186e0c155af4d9aa3417e175b327, type: 3}
+  m_NormalMapTexture: {fileID: 2800000, guid: d143559b8a8b2534098392b98179030f, type: 3}
   m_MaskMapTexture: {fileID: 0}
   m_TileSize: {x: 15, y: 10}
   m_TileOffset: {x: 0, y: 0}

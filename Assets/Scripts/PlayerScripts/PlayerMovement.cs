@@ -2,19 +2,23 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class PlayerMovement : MonoBehaviour
 {
     CharacterController _characterController;
+    [SerializeField] Transform look_root;
     Vector3 _moveDirection; //hangi eksende gittigimizi bilmek icin
-    [SerializeField] float _moveSpeed = 5f, _jumpForce = 10f;  //karakter hareket hizi
-    float _gravity = 20f, _verticalVelocity;
+    [SerializeField] float _moveSpeed = 5f, _jumpForce = 10f, _crouchSpeed = 2.5f, _sprintSpeed = 20f;  //karakter hareket hizi
+    float _gravity = 20f, _verticalVelocity, _normalSpeed = 5f;
+    float _standHeight = 1.6f, _crouchHeight = 1f;
+    bool _isCrouching;
     private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
     }
     private void Update()
     {
+        Sprint();
+        Crouch();
         MovePlayer();
     }
     void MovePlayer()
@@ -39,6 +43,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_characterController.isGrounded && Input.GetKeyDown(KeyCode.Space))
             _verticalVelocity = _jumpForce;
-
+    }
+    void Sprint()
+    {
+        _moveSpeed = Input.GetKey(KeyCode.LeftShift) ? _sprintSpeed : _normalSpeed;
+    }
+    void Crouch()
+    {
+        _moveSpeed = Input.GetKey(KeyCode.C) ? _crouchSpeed : _normalSpeed;
     }
 }

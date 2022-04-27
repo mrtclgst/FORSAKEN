@@ -41,7 +41,7 @@ public class MouseLook : MonoBehaviour
     }
     void LookAround()
     {
-        //Y ÝLE X Ý ters yazmamizin nedeni rotasyonel olarak dondurgumuz icin ters isliyor.
+        //Y ï¿½LE X ï¿½ ters yazmamizin nedeni rotasyonel olarak dondurgumuz icin ters isliyor.
         currentMouseLook = new Vector2(Input.GetAxis(MouseAxis.MOUSEY), Input.GetAxis(MouseAxis.MOUSEX));
         lookAngles.x += currentMouseLook.x * sensivity * (invert ? 1f : -1f);
         //yukari cektigimizde yukari gelmesi icin inverti -1 yaptik.
