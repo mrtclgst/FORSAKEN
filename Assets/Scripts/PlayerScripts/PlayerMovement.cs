@@ -11,9 +11,18 @@ public class PlayerMovement : MonoBehaviour
     float _gravity = 20f, _verticalVelocity, _normalSpeed = 5f;
     float _standHeight = 1.6f, _crouchHeight = 1f;
     bool _isCrouching;
+    float _sprintVolume = 1f, _crouchVolume = 0.2f;
+    float _walkVolumeMin = 0.3f, _walkVolumeMax = 0.6f, _walkStepDistance = 0.4f;
+    float _sprintStepDistance = 0.25f, _crouchStepDistance = 0.5f;
+    //stepDistanceler seslerin calma araligini temsil ediyor.
+    PlayerFootSteps _playerFootSteps;
     private void Awake()
     {
-        _characterController = GetComponent<CharacterController>();
+        AwakeRef();
+    }
+    private void Start()
+    {
+        NormalStepSoundSettings();
     }
     private void Update()
     {
@@ -47,9 +56,15 @@ public class PlayerMovement : MonoBehaviour
     void Sprint()
     {
         if (!_isCrouching && Input.GetKey(KeyCode.LeftShift))
+        {
             _moveSpeed = _sprintSpeed;
+            SprintStepSoundSettings();
+        }
         else
+        {
             _moveSpeed = _normalSpeed;
+            NormalStepSoundSettings();
+        }
     }
     void Crouch()
     {
@@ -58,12 +73,37 @@ public class PlayerMovement : MonoBehaviour
             look_root.localPosition = new Vector3(0, _crouchHeight);
             _moveSpeed = _crouchSpeed;
             _isCrouching = true;
+            CrouchStepSoundSettings();
         }
-        if (Input.GetKeyUp(KeyCode.C))     
+        if (Input.GetKeyUp(KeyCode.C))
         {
             look_root.localPosition = new Vector3(0, _standHeight);
             _moveSpeed = _normalSpeed;
             _isCrouching = false;
+            NormalStepSoundSettings();
         }
+    }
+    void AwakeRef()
+    {
+        _characterController = GetComponent<CharacterController>();
+        _playerFootSteps = GetComponentInChildren<PlayerFootSteps>();
+    }
+    void NormalStepSoundSettings()
+    {
+        _playerFootSteps._volumeMin = _walkVolumeMin;
+        _playerFootSteps._volumeMax = _walkVolumeMax;
+        _playerFootSteps._stepDistance = _walkStepDistance;
+    }
+    void CrouchStepSoundSettings()
+    {
+        _playerFootSteps._volumeMin = _crouchVolume;
+        _playerFootSteps._volumeMax = _crouchVolume;
+        _playerFootSteps._stepDistance = _crouchStepDistance;
+    }
+    void SprintStepSoundSettings()
+    {
+        _playerFootSteps._stepDistance = _sprintStepDistance;
+        _playerFootSteps._volumeMin = _sprintVolume;
+        _playerFootSteps._volumeMax = _sprintVolume;
     }
 }

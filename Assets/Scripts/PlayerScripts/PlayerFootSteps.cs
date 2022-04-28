@@ -11,10 +11,11 @@ public class PlayerFootSteps : MonoBehaviour
     CharacterController _characterController;
     [HideInInspector] public float _volumeMin, _volumeMax, _stepDistance;
     float _accumulatedDistance;
+
     private void Awake()
     {
         AwakeRef();
-        
+
     }
     private void Update()
     {
@@ -25,7 +26,7 @@ public class PlayerFootSteps : MonoBehaviour
     {
         if (!_characterController.isGrounded)
             return;
-        if (_characterController.velocity.sqrMagnitude>0)//sqrmagnitude vectorun uzunlugunun getiriyor.                             
+        if (_characterController.velocity.sqrMagnitude > 0)//sqrmagnitude vectorun uzunlugunun getiriyor.                             
         //If you're doing distance checks, use sqrMagnitude and just square the
         //distance you're checking against. If you need to know the actual distance,
         //then magnitude will work.
@@ -37,7 +38,7 @@ public class PlayerFootSteps : MonoBehaviour
             //e.g. make step sprint or crouch
             //until we play the footstep sound
             _accumulatedDistance += Time.deltaTime;
-            if (_accumulatedDistance>_stepDistance)
+            if (_accumulatedDistance > _stepDistance)
             {
                 _footStepSound.volume = Random.Range(_volumeMin, _volumeMax);
                 _footStepSound.clip = _footStepClip[Random.Range(0, _footStepClip.Length)];
@@ -46,11 +47,11 @@ public class PlayerFootSteps : MonoBehaviour
             }
         }
         else
-            _accumulatedDistance = 0f;
+            _accumulatedDistance = 0f;//ilk hareket aninda adim sesi duymamak icin resetliyoruz.
     }
     private void AwakeRef()
     {
         _footStepSound = GetComponent<AudioSource>();
-        _characterController = GetComponent<CharacterController>();
+        _characterController = GetComponentInParent<CharacterController>();
     }
 }

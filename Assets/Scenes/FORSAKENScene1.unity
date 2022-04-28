@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -329,45 +329,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3620426202240094028, guid: 94c353d6919700942a748f83b2dee3ce, type: 3}
-      propertyPath: footStepClip.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3620426202240094028, guid: 94c353d6919700942a748f83b2dee3ce, type: 3}
-      propertyPath: _footStepClip.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3620426202240094028, guid: 94c353d6919700942a748f83b2dee3ce, type: 3}
-      propertyPath: footStepClip.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 2429399f1ca311945a12f37a32c14aed, type: 3}
-    - target: {fileID: 3620426202240094028, guid: 94c353d6919700942a748f83b2dee3ce, type: 3}
-      propertyPath: footStepClip.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: f0761d807b3ae1d4598a50357cb58a5e, type: 3}
-    - target: {fileID: 3620426202240094028, guid: 94c353d6919700942a748f83b2dee3ce, type: 3}
-      propertyPath: footStepClip.Array.data[2]
-      value: 
-      objectReference: {fileID: 8300000, guid: f27be18648dcceb46a46397f5c4c2e62, type: 3}
-    - target: {fileID: 3620426202240094028, guid: 94c353d6919700942a748f83b2dee3ce, type: 3}
-      propertyPath: footStepClip.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: 3005916a05630f2439d211eaa6faba3d, type: 3}
-    - target: {fileID: 3620426202240094028, guid: 94c353d6919700942a748f83b2dee3ce, type: 3}
-      propertyPath: _footStepClip.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 2429399f1ca311945a12f37a32c14aed, type: 3}
-    - target: {fileID: 3620426202240094028, guid: 94c353d6919700942a748f83b2dee3ce, type: 3}
-      propertyPath: _footStepClip.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: f0761d807b3ae1d4598a50357cb58a5e, type: 3}
-    - target: {fileID: 3620426202240094028, guid: 94c353d6919700942a748f83b2dee3ce, type: 3}
-      propertyPath: _footStepClip.Array.data[2]
-      value: 
-      objectReference: {fileID: 8300000, guid: f27be18648dcceb46a46397f5c4c2e62, type: 3}
-    - target: {fileID: 3620426202240094028, guid: 94c353d6919700942a748f83b2dee3ce, type: 3}
-      propertyPath: _footStepClip.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: 3005916a05630f2439d211eaa6faba3d, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94c353d6919700942a748f83b2dee3ce, type: 3}
