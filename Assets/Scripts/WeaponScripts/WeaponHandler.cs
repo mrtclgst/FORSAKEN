@@ -6,11 +6,12 @@ using UnityEngine;
 public class WeaponHandler : MonoBehaviour
 {
     Animator _anim;
-    [SerializeField] WeaponAim _weaponAim;
-    [SerializeField] WeaponFireType _weaponFireType;
-    [SerializeField] WeaponBulletType _weaponBulletType;
-    [SerializeField] GameObject _muzzleFlash, _attackPoint;
+    public  WeaponAim _weaponAim;
+    public WeaponFireType _weaponFireType;
+    public WeaponBulletType _weaponBulletType;
+    [SerializeField] GameObject _muzzleFlash;
     [SerializeField] AudioSource _shootSound, _reloadSound;
+    public GameObject _attackPoint;
     private void Awake()
     {
         AwakeRef();
@@ -19,15 +20,15 @@ public class WeaponHandler : MonoBehaviour
     {
         _anim = GetComponent<Animator>();
     }
-    void ShootAnimation()
+    public void ShootAnimation()
     {
-        _anim.SetTrigger(AnimationsTag.ATTACK_TRIGGER);
+        _anim.SetTrigger(AnimationsTag.SHOOT_TRIGGER);
     }
     void Aim(bool canAim)
     {
         _anim.SetBool(AnimationsTag.AIM_PARAMETER, canAim);
     }
-    void TurnOnMuzzleFlash()
+    void TurnOnMuzzleFlash() 
     {
         _muzzleFlash.SetActive(true);
     }
@@ -55,15 +56,15 @@ public class WeaponHandler : MonoBehaviour
             _attackPoint.SetActive(false);
     }
 }
-enum WeaponAim
+public enum WeaponAim
 {
     NONE, SELF_AIM, AIM
 }
-enum WeaponFireType
+public enum WeaponFireType
 {
     SINGLE, MULTIPLE
 }
-enum WeaponBulletType
+public enum WeaponBulletType
 {
     NONE, BULLET, ARROW, SPEAR
 }

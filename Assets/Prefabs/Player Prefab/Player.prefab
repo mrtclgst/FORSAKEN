@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1121071374255460663}
   - component: {fileID: 1121071374255460660}
   - component: {fileID: 2223497693947912255}
+  - component: {fileID: 2102212227}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -69,6 +70,25 @@ MonoBehaviour:
   _jumpForce: 10
   _crouchSpeed: 2.5
   _sprintSpeed: 8
+--- !u!114 &2102212227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121071374255460662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d12111edab794c57bb0309b3b54fd45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons:
+  - {fileID: 4125378973593355883}
+  - {fileID: 7084349995045240076}
+  - {fileID: 909704555193414175}
+  - {fileID: 8735388914361223577}
+  - {fileID: 924681787720671712}
+  - {fileID: 7269795826659275725}
 --- !u!1 &1121071375088006498
 GameObject:
   m_ObjectHideFlags: 0
