@@ -28,6 +28,7 @@ public class WeaponManager : MonoBehaviour
     }
     public void GetSelectedWeapon(int _selectedWeaponIndex)
     {
+        //secilen silah ayniysa bir sey yapma
         if (_currentWeaponIndex == _selectedWeaponIndex)
             return;
 
@@ -37,6 +38,7 @@ public class WeaponManager : MonoBehaviour
     }
     public WeaponHandler GetCurrentSelectedWeapon()
     {
+        //bunu PlayerAttack Scriptinde kullanacagiz.
         return weapons[_currentWeaponIndex];
     }
 }

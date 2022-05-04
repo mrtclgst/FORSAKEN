@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Axe
+  - Crosshair
+  - Arrow
+  - Spear
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -12,8 +17,8 @@ TagManager:
   - Water
   - UI
   - FirstPerson
-  - 
-  - 
+  - Enemy
+  - Player
   - 
   - 
   - 

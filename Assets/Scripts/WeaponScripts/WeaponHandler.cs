@@ -24,7 +24,7 @@ public class WeaponHandler : MonoBehaviour
     {
         _anim.SetTrigger(AnimationsTag.SHOOT_TRIGGER);
     }
-    void Aim(bool canAim)
+    public void Aim(bool canAim)
     {
         _anim.SetBool(AnimationsTag.AIM_PARAMETER, canAim);
     }
