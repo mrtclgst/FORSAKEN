@@ -8,11 +8,13 @@ using UnityEngine.SceneManagement;
 public class HealthScript : MonoBehaviour
 {
     EnemyAnimationController _enemyAnim;
+    PlayerStats _playerStats;
     NavMeshAgent _navMeshAgent;
     EnemyController _enemyController;
     public float _health = 100f;
     [SerializeField] bool _isPlayer, _isBoar, _isCannibal;
     bool _isDead;
+    EnemyAudio _enemyAudio;
     private void Awake()
     {
         //burasi enumla yapilabilir.
@@ -23,7 +25,7 @@ public class HealthScript : MonoBehaviour
         }
         if (_isPlayer)
         {
-
+            _playerStats = GetComponent<PlayerStats>();
         }
     }
     public void ApplyDamage(float _damage)
@@ -35,7 +37,7 @@ public class HealthScript : MonoBehaviour
 
         if (_isPlayer)
         {
-
+            _playerStats.DisplayHealthStat(_health);
         }
         if (_isBoar || _isCannibal)
         {
@@ -66,6 +68,7 @@ public class HealthScript : MonoBehaviour
             _navMeshAgent.isStopped = true;
             _enemyController.enabled = false;
             _enemyAnim.Dead();
+            StartCoroutine(DeadSound());
         }
         if (_isPlayer)
         {
@@ -82,7 +85,7 @@ public class HealthScript : MonoBehaviour
             GetComponent<PlayerAttack>().enabled = false;
             GetComponent<WeaponManager>().GetCurrentSelectedWeapon().gameObject.SetActive(false);
         }
-        if (tag==Tags.PLAYER_TAG)
+        if (tag == Tags.PLAYER_TAG)
         {
             Invoke("RestartGame", 3f);
         }
@@ -90,6 +93,11 @@ public class HealthScript : MonoBehaviour
         {
             Invoke("TurnOffGameObject", 3f);
         }
+    }
+    IEnumerator DeadSound()
+    {
+        yield return new WaitForSeconds(.3f);
+        _enemyAudio.PlayDeadSound();
     }
     void RestartGame()
     {
@@ -105,5 +113,6 @@ public class HealthScript : MonoBehaviour
         _enemyAnim = GetComponent<EnemyAnimationController>();
         _enemyController = GetComponent<EnemyController>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        _enemyAudio = GetComponentInChildren<EnemyAudio>();
     }
 }

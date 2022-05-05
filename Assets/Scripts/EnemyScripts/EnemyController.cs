@@ -18,6 +18,7 @@ public class EnemyController : MonoBehaviour
     float _attackTimer;
     Transform target;
     [SerializeField] GameObject _attackPoint;
+    EnemyAudio _enemyAudio;
     private void Awake()
     {
         AwakeRef();
@@ -67,7 +68,7 @@ public class EnemyController : MonoBehaviour
         {
             _EnemyAnimationController.Walk(false);//run animasyonunu devreye sokacagiz 
             enemyState = EnemyStates.CHASE;
-
+            _enemyAudio.PlayScreamSound();
         }
     }
     private void Chase()
@@ -108,12 +109,13 @@ public class EnemyController : MonoBehaviour
         _navAgent.velocity = Vector3.zero;
         _navAgent.isStopped = true;
 
-        //timer baslatiyoruz.
+        //timer baslatiyoruz. 
         _attackTimer += Time.deltaTime;
         if (_attackTimer > _waitBeforeAttack)
         {
             _EnemyAnimationController.Attack();
             _attackTimer = 0f;
+            _enemyAudio.PlayAttackSound();
         }
         //player kactigi zaman yapilacak islemler
         if (Vector3.Distance(transform.position, target.position)
@@ -149,6 +151,7 @@ public class EnemyController : MonoBehaviour
         _EnemyAnimationController = GetComponent<EnemyAnimationController>();
         _navAgent = GetComponent<NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag(Tags.PLAYER_TAG).transform;
+        _enemyAudio = GetComponentInChildren<EnemyAudio>();
     }
 }
 public enum EnemyStates

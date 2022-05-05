@@ -16,6 +16,9 @@ public class PlayerMovement : MonoBehaviour
     float _sprintStepDistance = 0.25f, _crouchStepDistance = 0.5f;
     //stepDistanceler seslerin calma araligini temsil ediyor.
     PlayerFootSteps _playerFootSteps;
+    PlayerStats _playerStats;
+    float _staminaValue = 100f;
+    public float _staminaTreshold = 10f;
     private void Awake()
     {
         AwakeRef();
@@ -55,15 +58,43 @@ public class PlayerMovement : MonoBehaviour
     }
     void Sprint()
     {
+        //stamina value
+        if (_staminaValue > 0f)
+        {
+            if (!_isCrouching && Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                _moveSpeed = _sprintSpeed;
+                SprintStepSoundSettings();
+                _staminaValue -= Time.deltaTime * _staminaTreshold;
+                _playerStats.DisplayStaminaStat(_staminaValue);
+            }
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            _moveSpeed = _normalSpeed;
+            NormalStepSoundSettings();
+        }
         if (!_isCrouching && Input.GetKey(KeyCode.LeftShift))
         {
-            _moveSpeed = _sprintSpeed;
-            SprintStepSoundSettings();
+            _staminaValue -= _staminaTreshold * Time.deltaTime;
+            if (_staminaValue <= 0f)
+            {
+                _moveSpeed = _normalSpeed;
+                NormalStepSoundSettings();
+            }
+            _playerStats.DisplayStaminaStat(_staminaValue);
         }
         else
         {
             _moveSpeed = _normalSpeed;
             NormalStepSoundSettings();
+            if (_staminaValue != 100f)
+            {
+                _staminaValue += _staminaTreshold * Time.deltaTime;
+                _playerStats.DisplayStaminaStat(_staminaValue);
+                if (_staminaValue > 100f)
+                    _staminaValue = 100f;
+            }
         }
     }
     void Crouch()
@@ -87,6 +118,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _characterController = GetComponent<CharacterController>();
         _playerFootSteps = GetComponentInChildren<PlayerFootSteps>();
+        _playerStats = GetComponent<PlayerStats>();
     }
     void NormalStepSoundSettings()
     {
