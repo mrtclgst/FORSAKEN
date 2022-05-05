@@ -61,6 +61,8 @@ public class HealthScript : MonoBehaviour
             _enemyController.enabled = false;
             _navMeshAgent.enabled = false;
             _enemyAnim.enabled = false;
+            //cannibal spawn et.
+            EnemyManager.instance.EnemyDied(true);
         }
         if (_isBoar)
         {
@@ -69,6 +71,9 @@ public class HealthScript : MonoBehaviour
             _enemyController.enabled = false;
             _enemyAnim.Dead();
             StartCoroutine(DeadSound());
+            //domuz spawn et.
+            EnemyManager.instance.EnemyDied(false);
+
         }
         if (_isPlayer)
         {
@@ -81,6 +86,9 @@ public class HealthScript : MonoBehaviour
             {
                 enemies[i].GetComponent<EnemyController>().enabled = false;
             }
+            //spawn etmeyi durdur.
+            EnemyManager.instance.StopSpawning();
+
             GetComponent<PlayerMovement>().enabled = false;
             GetComponent<PlayerAttack>().enabled = false;
             GetComponent<WeaponManager>().GetCurrentSelectedWeapon().gameObject.SetActive(false);

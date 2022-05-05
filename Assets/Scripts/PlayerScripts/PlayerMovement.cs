@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
         //stamina value
         if (_staminaValue > 0f)
         {
-            if (!_isCrouching && Input.GetKeyDown(KeyCode.LeftShift))
+            if (!_isCrouching && Input.GetKeyDown(KeyCode.LeftShift) /*&& _characterController.velocity.sqrMagnitude > 1f*/)
             {
                 _moveSpeed = _sprintSpeed;
                 SprintStepSoundSettings();
@@ -74,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
             _moveSpeed = _normalSpeed;
             NormalStepSoundSettings();
         }
-        if (!_isCrouching && Input.GetKey(KeyCode.LeftShift))
+        if (!_isCrouching && Input.GetKey(KeyCode.LeftShift) /*&& _characterController.velocity.sqrMagnitude > 1f*/)
         {
             _staminaValue -= _staminaTreshold * Time.deltaTime;
             if (_staminaValue <= 0f)
