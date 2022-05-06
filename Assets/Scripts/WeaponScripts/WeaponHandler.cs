@@ -6,19 +6,15 @@ using UnityEngine;
 public class WeaponHandler : MonoBehaviour
 {
     Animator _anim;
-    public  WeaponAim _weaponAim;
+    public WeaponAim _weaponAim;
     public WeaponFireType _weaponFireType;
     public WeaponBulletType _weaponBulletType;
     [SerializeField] GameObject _muzzleFlash;
     [SerializeField] AudioSource _shootSound, _reloadSound;
-    public GameObject _attackPoint;
+    [SerializeField] GameObject _attackPoint;
     private void Awake()
     {
         AwakeRef();
-    }
-    private void AwakeRef()
-    {
-        _anim = GetComponent<Animator>();
     }
     public void ShootAnimation()
     {
@@ -28,7 +24,7 @@ public class WeaponHandler : MonoBehaviour
     {
         _anim.SetBool(AnimationsTag.AIM_PARAMETER, canAim);
     }
-    void TurnOnMuzzleFlash() 
+    void TurnOnMuzzleFlash()
     {
         _muzzleFlash.SetActive(true);
     }
@@ -54,6 +50,10 @@ public class WeaponHandler : MonoBehaviour
     {
         if (_attackPoint.activeInHierarchy)
             _attackPoint.SetActive(false);
+    }
+    private void AwakeRef()
+    {
+        _anim = GetComponent<Animator>();
     }
 }
 public enum WeaponAim

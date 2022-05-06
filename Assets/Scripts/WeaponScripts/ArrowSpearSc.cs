@@ -5,17 +5,12 @@ using UnityEngine;
 public class ArrowSpearSc : MonoBehaviour
 {
     Rigidbody _rg;
-    public float _speed = 30f;
-    public float _destroyTime = 3f;
-    public float _damage = 15f;
+    [SerializeField] float _speed = 30f;
+    [SerializeField] float _destroyTime = 3f;
+    [SerializeField] float _damage = 15f;
     private void Awake()
     {
         _rg = GetComponent<Rigidbody>();
-    }
-    private void Start()
-    {
-        //Invoke is useful if you want to do something one time only.
-        Invoke("DestroyGameObject", _destroyTime);
     }
     public void Launch(Camera camera)
     {
@@ -23,15 +18,19 @@ public class ArrowSpearSc : MonoBehaviour
         //gidecegi rotasyonu ayarliyoruz. yonunu ayarliyoruz.
         transform.LookAt(transform.position + _rg.velocity);
         //baktigi yon instantiate ederken verilebilir.
+        DestroyGameObject();
     }
     void DestroyGameObject()
     {
-        //destroy ile yazilabilir
         if (gameObject.activeInHierarchy)
-            gameObject.SetActive(false);
+            Destroy(this.gameObject, 5f);
     }
     private void OnTriggerEnter(Collider other)
     {
-
+        if (other.tag == Tags.ENEMY_TAG)
+        {
+            other.GetComponent<HealthScript>().ApplyDamage(_damage);
+            Destroy(gameObject, 1f);
+        }
     }
 }
