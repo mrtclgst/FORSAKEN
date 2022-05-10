@@ -2,3 +2,5 @@
 * text=auto
 *.css linguist-detectable=true
 *.js linguist-detectable=false
+*.cs linguist-detectable=true
+*/*/My?Project/*.vb linguist-generated
