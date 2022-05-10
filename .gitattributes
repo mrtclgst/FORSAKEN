@@ -1,4 +1,5 @@
 **/shaders/* linguist-vendored=false
+**/cginc/* linguist-vendored=false
 *.csharp linguist-detectable=true
 *.java linguist-detectable=false
 *.js linguist-detectable=false
