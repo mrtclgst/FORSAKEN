@@ -38,11 +38,11 @@ public class EnemyController : MonoBehaviour
         {
             Patrol();
         }
-        if (enemyState == EnemyStates.CHASE)
+        else if (enemyState == EnemyStates.CHASE)
         {
             Chase();
         }
-        if (enemyState == EnemyStates.ATTACK)
+        else if (enemyState == EnemyStates.ATTACK)
         {
             Attack();
         }
@@ -51,12 +51,13 @@ public class EnemyController : MonoBehaviour
     {
         //nav agenta hareket edebilecegini soyluyoruz
         _navAgent.isStopped = false;
+        //navAgent speed ayari
         _navAgent.speed = _walkSpeed;
         //patrol icin saat timer olusturduk.
         _patrolTimer += Time.deltaTime;
         if (_patrolTimer > _patrolForThisTime)//kac sn bozmadan yuruyecegini belirliyoruz.
         {
-            SetNewRandomDestination();
+            SetNewRandomDestination();//yurume guzergahi olusturacagiz.
             _patrolTimer = 0f;
         }
         if (_navAgent.velocity.sqrMagnitude > 0)//navagent hareket ediyorsa
@@ -64,19 +65,21 @@ public class EnemyController : MonoBehaviour
         else
             _EnemyAnimationController.Walk(false);
 
+        //player ile  enemy arasindaki mesafeyi kiyasliyoruz.
         if (Vector3.Distance(transform.position, target.position) <= _chaseDistance)
         {
             _EnemyAnimationController.Walk(false);//run animasyonunu devreye sokacagiz 
-            enemyState = EnemyStates.CHASE;
+            enemyState = EnemyStates.CHASE;//state ayarliyoruz.
             _enemyAudio.PlayScreamSound();
         }
     }
     private void Chase()
     {
+        //enemymize yurume ozelligi ve hizi veriyoruz.
         _navAgent.isStopped = false;
         _navAgent.speed = _runSpeed;
         //player'imiza dogru kosacak
-        _navAgent.SetDestination(target.position);
+        _navAgent.SetDestination(target.position);//enemyi playera dogru yurutuyoruz.
 
         if (_navAgent.velocity.sqrMagnitude > 0)//navagent hareket ediyorsa
             _EnemyAnimationController.Run(true);
@@ -90,15 +93,16 @@ public class EnemyController : MonoBehaviour
             _EnemyAnimationController.Walk(false);
             enemyState = EnemyStates.ATTACK;
 
-            //Uzaktan enemye ates ettigimizde bizi tespit edip kosmasini istiyoruz.
+            //oncekine ressetliyoruz 
             if (_chaseDistance != _currentChaseDistance)
                 _chaseDistance = _currentChaseDistance;
         }
-        else if (Vector3.Distance(transform.position, target.position) <= _chaseDistance)
+        else if (Vector3.Distance(transform.position, target.position) > _chaseDistance)
         {
             _EnemyAnimationController.Run(false);
             enemyState = EnemyStates.PATROL;
             _patrolTimer = _patrolForThisTime;
+
             if (_chaseDistance != _currentChaseDistance)
                 _chaseDistance = _currentChaseDistance;
         }
@@ -108,7 +112,6 @@ public class EnemyController : MonoBehaviour
         //enemy'i durduruyoruz.
         _navAgent.velocity = Vector3.zero;
         _navAgent.isStopped = true;
-
         //timer baslatiyoruz. 
         _attackTimer += Time.deltaTime;
         if (_attackTimer > _waitBeforeAttack)
@@ -118,14 +121,15 @@ public class EnemyController : MonoBehaviour
             _enemyAudio.PlayAttackSound();
         }
         //player kactigi zaman yapilacak islemler
-        if (Vector3.Distance(transform.position, target.position)
-            >= _attackDistance + _chaseAfterAttackDistance/*aralik veriyoruz playerin kacabilmesi icin*/)
+        if (Vector3.Distance(transform.position, target.position) >= _attackDistance + _chaseAfterAttackDistance
+            /*aralik veriyoruz playerin kacabilmesi icin*/)
         {
             enemyState = EnemyStates.CHASE;
         }
     }
     private void SetNewRandomDestination()
     {
+        //devriye atilacak alani belirliyoruz.
         float _randomRadius = UnityEngine.Random.Range(_patrolRadiusMin, _patrolRadiusMax);
         Vector3 _randomDirection = UnityEngine.Random.insideUnitSphere * _randomRadius;
         _randomDirection += transform.position;

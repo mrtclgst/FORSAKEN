@@ -11,7 +11,7 @@ public class HealthScript : MonoBehaviour
     PlayerStats _playerStats;
     NavMeshAgent _navMeshAgent;
     EnemyController _enemyController;
-    public float _health = 100f;
+    [SerializeField] float _health = 100f;
     [SerializeField] bool _isPlayer, _isBoar, _isCannibal;
     bool _isDead;
     EnemyAudio _enemyAudio;
@@ -56,13 +56,14 @@ public class HealthScript : MonoBehaviour
         if (_isCannibal)
         {
             GetComponent<Animator>().enabled = false;
+            GetComponent<Rigidbody>().AddForce(-transform.forward * 50f);
             GetComponent<BoxCollider>().isTrigger = false;
-            GetComponent<Rigidbody>().AddTorque(-transform.forward * 10f);
             _enemyController.enabled = false;
             _navMeshAgent.enabled = false;
             _enemyAnim.enabled = false;
             //cannibal spawn et.
             EnemyManager.instance.EnemyDied(true);
+            Destroy(gameObject, 2f);
         }
         if (_isBoar)
         {
@@ -73,7 +74,7 @@ public class HealthScript : MonoBehaviour
             StartCoroutine(DeadSound());
             //domuz spawn et.
             EnemyManager.instance.EnemyDied(false);
-
+            Destroy(gameObject, 2f);
         }
         if (_isPlayer)
         {

@@ -31,6 +31,7 @@ public class MouseLook : MonoBehaviour
             if (Cursor.lockState == CursorLockMode.Locked)
             {
                 Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
             }
             else
             {
@@ -55,7 +56,5 @@ public class MouseLook : MonoBehaviour
         lookRoot.localRotation = Quaternion.Euler(lookAngles.x, 0f, 0f /*currentRollAngle*/);
         playerRoot.localRotation = Quaternion.Euler(0, lookAngles.y, 0);
         //playeri rotate etmemizin sebebi lookRootu rotateledigimiz zaman movementimiz farkli calismaya basliyor.
-
-
     }
 }

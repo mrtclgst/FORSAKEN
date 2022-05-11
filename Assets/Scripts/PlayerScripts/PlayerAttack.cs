@@ -7,13 +7,13 @@ public class PlayerAttack : MonoBehaviour
 {
     WeaponManager _weaponManager;
     [SerializeField] float _fireRate = 15f, _damage = 20f;
-    float _timeToNextFire;
+    float _timeToNextFire, _spearArrowTimer;
     [SerializeField] Animator _zoomCameraAnim;
-    bool _zoomed, _isAiming;
+    public bool _zoomed, _isAiming;
     Camera _mainCam;
     GameObject _crosshair;
     [SerializeField] GameObject _arrowPrefab, _spearPrefab;
-    [SerializeField] Transform _arrowBowStartPos;
+    [SerializeField] Transform _arrowStartPos, _spearStartPos;
     private void Awake()
     {
         AwakeRef();
@@ -25,7 +25,7 @@ public class PlayerAttack : MonoBehaviour
     }
     private void WeaponShoot()
     {
-        //weapon is assault rifle00
+        //weapon is assault rifle
         if (_weaponManager.GetCurrentSelectedWeapon()._weaponFireType == WeaponFireType.MULTIPLE)
         {
             if (Input.GetMouseButton(0) && Time.time > _timeToNextFire)
@@ -53,7 +53,7 @@ public class PlayerAttack : MonoBehaviour
                 }
                 else
                 {
-                    if (_isAiming)
+                    if (_isAiming && _spearArrowTimer > 1f)
                     {
                         _weaponManager.GetCurrentSelectedWeapon().ShootAnimation();
                         if (_weaponManager.GetCurrentSelectedWeapon()._weaponBulletType == WeaponBulletType.ARROW)
@@ -64,13 +64,9 @@ public class PlayerAttack : MonoBehaviour
                         {
                             ThrowArrowSpear(false);
                         }
+                        _spearArrowTimer = 0f;
                     }
                 }
-
-            }
-            else
-            {
-
             }
         }
     }
@@ -95,11 +91,13 @@ public class PlayerAttack : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(1))
             {
+                _spearArrowTimer +=Time.time;
                 _weaponManager.GetCurrentSelectedWeapon().Aim(true);
                 _isAiming = true;
             }
             if (Input.GetMouseButtonUp(1))
             {
+                _spearArrowTimer += Time.time;
                 _weaponManager.GetCurrentSelectedWeapon().Aim(false);
                 _isAiming = false;
             }
@@ -118,14 +116,14 @@ public class PlayerAttack : MonoBehaviour
         if (throwArrow)
         {
             GameObject arrow = Instantiate(_arrowPrefab);
-            arrow.transform.position = _arrowBowStartPos.position;
+            arrow.transform.position = _arrowStartPos.position;
 
             arrow.GetComponent<ArrowSpearSc>().Launch(_mainCam);
         }
         else
         {
             GameObject spear = Instantiate(_spearPrefab);
-            spear.transform.position = _arrowBowStartPos.position;
+            spear.transform.position = _spearStartPos.position;
 
             spear.GetComponent<ArrowSpearSc>().Launch(_mainCam);
             //instantiate diger overloadlarla yap!!!

@@ -7,7 +7,7 @@ public class ArrowSpearSc : MonoBehaviour
     Rigidbody _rg;
     [SerializeField] float _speed = 30f;
     [SerializeField] float _destroyTime = 3f;
-    [SerializeField] float _damage = 15f;
+    [SerializeField] float _damage = 100f;
     private void Awake()
     {
         _rg = GetComponent<Rigidbody>();
@@ -23,7 +23,7 @@ public class ArrowSpearSc : MonoBehaviour
     void DestroyGameObject()
     {
         if (gameObject.activeInHierarchy)
-            Destroy(this.gameObject, 5f);
+            Destroy(this.gameObject, _destroyTime);
     }
     private void OnTriggerEnter(Collider other)
     {

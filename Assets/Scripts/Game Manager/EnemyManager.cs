@@ -23,7 +23,6 @@ public class EnemyManager : MonoBehaviour
         SpawnEnemies();
         StartCoroutine(CheckToSpawnEnemies());
     }
-
     private void SpawnEnemies()
     {
         SpawnBoars();
@@ -31,23 +30,27 @@ public class EnemyManager : MonoBehaviour
     }
     void SpawnCannibal()
     {
+        int index = 0;
         for (int i = 0; i < _cannibalEnemyCount; i++)
         {
-            if (i >= _cannibalSpawnPoint.Length)
-                i = 0;
+            if (index >= _cannibalSpawnPoint.Length)
+                index = 0;
             else
                 Instantiate(_cannibalPrefab, _cannibalSpawnPoint[i].position, Quaternion.identity);
+            index++;
         }
         _cannibalEnemyCount = 0;
     }
     void SpawnBoars()
     {
+        int index = 0;
         for (int i = 0; i < _boarEnemyCount; i++)
         {
-            if (i >= _boarSpawnPoints.Length)
-                i = 0;
+            if (index >= _boarSpawnPoints.Length)
+                index = 0;
             else
                 Instantiate(_boarPrefab, _boarSpawnPoints[i].position, Quaternion.identity);
+            index++;
         }
         _boarEnemyCount = 0;
     }
@@ -56,7 +59,7 @@ public class EnemyManager : MonoBehaviour
         if (cannibal)
         {
             _cannibalEnemyCount++;
-            //daha fazla cannibal uretmesini engelliyoruz.
+            ////daha fazla cannibal uretmesini engelliyoruz.
             if (_cannibalEnemyCount > _initialCannibalCount)
                 _cannibalEnemyCount = _initialCannibalCount;
 

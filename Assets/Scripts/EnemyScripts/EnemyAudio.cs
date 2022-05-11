@@ -27,9 +27,6 @@ public class EnemyAudio : MonoBehaviour
         _audioSource.clip = _dieSound;
         _audioSource.Play();
     }
-
-
-
     private void AwakeRef()
     {
         _audioSource = GetComponent<AudioSource>();
