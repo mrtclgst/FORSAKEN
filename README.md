@@ -1,2 +1,2 @@
 # FORSAKEN
-Youtube'da video ile yaptığım fps oyun.
+Youtube'da tutorial yardımı ile yaptığım fps oyun.
